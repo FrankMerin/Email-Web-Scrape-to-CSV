@@ -1,12 +1,8 @@
 import re
 import requests
-from urllib.parse import urlsplit
-from bs4 import BeautifulSoup
 import pandas as pd
 import os
-from pandas import ExcelWriter
 import csv
-
 
 
 
@@ -25,10 +21,8 @@ def main():
     full_path = os.path.join(user_path, file_name)
 
     if not doesFileExist(full_path):
-        createExcelFile(full_path)
+        createCsvFile(full_path)
     
-
-
 
     unique_emails = sendRequest(input_url)
 
@@ -64,7 +58,7 @@ def doesFileExist(full_path):
 
 
 # create new excel file
-def createExcelFile(full_path):
+def createCsvFile(full_path):
     open(full_path,"a")
 
 
@@ -76,7 +70,7 @@ def sendRequest(input_url):
 
 
 
-# populates data into Excel
+# populates data into CSV
 def populateData(full_path, unique_emails):
     df = pd.DataFrame(unique_emails)
     df.to_csv(full_path, index=False, mode="a", header=False)
