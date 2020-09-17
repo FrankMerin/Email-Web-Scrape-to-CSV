@@ -64,8 +64,8 @@ def createCsvFile(full_path):
 
 # returns a set of unique emails from target site
 def sendRequest(input_url):
-    response = requests.get(input_url)
-    unique_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", response.text, re.I))
+    response = requests.get(input_url, verify=False)
+    unique_emails = set(re.findall(r"[\w.-]+@[\w.-]+\.\w+", response.text, re.I))
     return unique_emails
 
 
